@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 150vh; /* 120 */
+    background: url('https://images3.alphacoders.com/136/thumb-1920-1364877.png') no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.wrapper{  /* cuadro chiquito */
+    width: 440px; /* 420 */
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    color: #fff;
+    border-radius: 10px;
+    padding: 30px 40px;
+}
+
+.wrapper h1 {  /* titulo */ 
+    font-size: 36px;
+    text-align: center;
+}
+
+.wrapper .input-box{        /* posible a qiuitar */
+    position: relative;
+    width: 100%;
+    height: 35px;   /*50*/
+    margin: 30px 0;
+}
+
+.input-box input{           /* posible a quitar */
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgb(255, 255, 255, .2);
+    /*border-radius: 40px;*/
+    font-size: 16px;
+    color: #fff;
+    padding: 20px 45px 20px 20px;
+}
+
+.input-box b{
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-30%);
+    font-size: 16px;
+}
+
+#in-titulo{
+    padding: 20px 45px 20px 70px;
+}
+#in-genero{
+    padding: 20px 45px 20px 85px;
+}
+#in-anio{
+    padding: 20px 45px 20px 60px;
+}
+#in-direccion{
+    padding: 20px 45px 20px 103px;
+}
+#in-tipo{
+    padding: 20px 45px 20px 65px;
+}
+
+.wrapper .input-area{
+    position: relative;
+    width: 100%;
+    height: 80px;
+    margin: 65px 0;
+}
+
+.input-area textarea{
+    height: 170px;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgb(255, 255, 255, .2);
+    font-size: 16px;
+    color: #fff;
+    padding: 30px 0px 0px 0px;
+}
+
+.wrapper .input-area1{
+    position: relative;
+    width: 100%;
+    height: 80px;
+    margin: 30px 0;
+}
+
+.input-area1 textarea{
+    height: 120px;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgb(255, 255, 255, .2);
+    font-size: 16px;
+    color: #fff;
+    padding: 30px 0px 0px 0px;
+}
+
+.input-area1 b{
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-145%);
+    font-size: 16px;
+}
+
+.input-area b{
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-145%);
+    font-size: 16px;
+}

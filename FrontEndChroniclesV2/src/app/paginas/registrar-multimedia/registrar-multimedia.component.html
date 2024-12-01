@@ -1,0 +1,74 @@
+<body>
+    <div class="wrapper">
+        <form [formGroup]="registerForm">
+            <!-- <p class="text-danger">{{registroError}}</p> -->
+            <h1>Registro Multimedia</h1>
+
+            <div class="input-box">
+                <input type="text" placeholder="Título" formControlName="titulo" class="form-control" required>
+                <div *ngIf="titulo.invalid && (titulo.dirty || titulo.touched)" class="text-danger">
+                  <div *ngIf="titulo.errors?.['required']">
+                    El Titulo es requerido.
+                  </div>
+                </div>
+            </div>
+
+            <div class="input-box">
+                <input type="text" placeholder="Género" formControlName="genero" class="form-control" required>
+                <div *ngIf="genero.invalid && (genero.dirty || genero.touched)" class="text-danger">
+                  <div *ngIf="genero.errors?.['required']">
+                    El Genero es requerido.
+                  </div>
+                </div>
+            </div>
+
+            <div class="input-box">
+                <input type="number" placeholder="Año" formControlName="anio" class="form-control" required>
+                <div *ngIf="anio.invalid && (anio.dirty || anio.touched)" class="text-danger">
+                  <div *ngIf="anio.errors?.['required']">
+                    El Año es requerido.
+                  </div>
+                </div>
+            </div>
+
+            <div class="input-box">
+                <input type="text" placeholder="Dirección" formControlName="direccion" class="form-control" required>
+                <div *ngIf="direccion.invalid && (direccion.dirty || direccion.touched)" class="text-danger">
+                  <div *ngIf="direccion.errors?.['required']">
+                    La Direccion es requerida.
+                  </div>
+                </div>
+            </div>
+
+            <div class="input-box">
+              <select class="form-select" formControlName="tipo" aria-label="Default select example">
+                <option value="" disabled>Tipo </option>
+                <option value="Pelicula">Película</option>
+                <option value="Serie">Serie</option>
+                <option value="Animado">Animado</option>
+              </select>
+            </div>
+
+            <div class="input-box">
+                <input type="text" placeholder="Portada" formControlName="portada" class="form-control" required>
+                <div *ngIf="portada.invalid && (portada.dirty || portada.touched)" class="text-danger">
+                  <div *ngIf="portada.errors?.['required']">
+                    Link requerido.
+                  </div>
+                </div>
+            </div>
+
+            <div class="input-area">
+                <textarea placeholder="Sinopsis" formControlName="sinopsis" class="form-control" rows="3"></textarea>
+                <div *ngIf="sinopsis.invalid && (sinopsis.dirty || sinopsis.touched)" class="text-danger">
+                  <div *ngIf="sinopsis.errors?.['required']">
+                    Sinopsis requerido.
+                  </div>
+                </div>
+            </div>
+    
+            <button type="submit" (click)="guardarMultimedia()" class="btn btn-primary">Aceptar</button>
+
+        </form>
+    </div>
+</body>

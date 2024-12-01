@@ -1,0 +1,80 @@
+<body>
+    <div class="wrapper">
+        <form [formGroup]="registerForm">
+            <p class="text-danger">{{registroError}}</p>
+            <h1>Actualización</h1>
+
+            <div class="input-box">
+                <i>Título:</i>
+                <input id="in-titulo" type="text" formControlName="titulo" class="form-control" required>
+                <div *ngIf="titulo.invalid && (titulo.dirty || titulo.touched)" class="text-danger">
+                  <div *ngIf="titulo.errors?.['required']">
+                    El Titulo es requerido.
+                  </div>
+                </div>
+            </div>
+
+            <div class="input-box">
+                <i>Género:</i>
+                <input type="text" formControlName="genero" class="form-control" required>
+                <div *ngIf="genero.invalid && (genero.dirty || genero.touched)" class="text-danger">
+                  <div *ngIf="genero.errors?.['required']">
+                    El Genero es requerido.
+                  </div>
+                </div>
+            </div>
+
+            <div class="input-box">
+                <i>Año:</i>
+                <input id="in-anio" type="number" formControlName="anio" class="form-control" required>
+                <div *ngIf="anio.invalid && (anio.dirty || anio.touched)" class="text-danger">
+                  <div *ngIf="anio.errors?.['required']">
+                    El Año es requerido.
+                  </div>
+                </div>
+            </div>
+
+            <div class="input-box">
+                <i>Dirección:</i>
+                <input id="in-direccion" type="text" formControlName="direccion" class="form-control" required>
+                <div *ngIf="direccion.invalid && (direccion.dirty || direccion.touched)" class="text-danger">
+                  <div *ngIf="direccion.errors?.['required']">
+                    La Direccion es requerida.
+                  </div>
+                </div>
+            </div>
+
+            <div class="input-box">
+              <select class="form-select" formControlName="tipo" aria-label="Default select example">
+                <option selected><p>{{multimedia.tipo}}</p></option>
+                <option *ngIf="(multimedia.tipo != 'Pelicula')" value="Pelicula">Película</option>
+                <option *ngIf="(multimedia.tipo != 'Serie')" value="Serie">Serie</option>
+                <option *ngIf="(multimedia.tipo != 'Animado')" value="Animado">Animado</option>
+              </select>
+            </div>
+
+            <div class="input-box">
+                <i>Portada:</i>
+                <input id="in-portada" type="text" formControlName="portada" class="form-control" required>
+                <div *ngIf="portada.invalid && (portada.dirty || portada.touched)" class="text-danger">
+                  <div *ngIf="portada.errors?.['required']">
+                    Link requerido.
+                  </div>
+                </div>
+            </div>
+
+            <div class="input-area">
+                <i>Sinopsis:</i>
+                <textarea placeholder="Sinopsis" formControlName="sinopsis" class="form-control" rows="3" required></textarea>
+                <div *ngIf="sinopsis.invalid && (sinopsis.dirty || sinopsis.touched)" class="text-danger">
+                  <div *ngIf="sinopsis.errors?.['required']">
+                    Sinopsis requerida.
+                  </div>
+                </div>
+            </div>
+    
+            <button type="submit" (click)="actualizarMultimedia()" class="btn btn-primary">Aceptar</button>
+
+        </form>
+    </div>
+</body>

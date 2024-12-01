@@ -1,0 +1,133 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 150vh;
+    background: url('/assets/imagenes/act1.png') no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.wrapper{
+    width: 420px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    color: #fff;
+    border-radius: 10px;
+    padding: 30px 40px;
+}
+
+.wrapper h1{
+    font-size: 36px;
+    text-align: center;
+}
+
+.wrapper .input-box{        /* posible a qiuitar */
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+
+.input-box input{           /* posible a quitar */
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgb(255, 255, 255, .2);
+    border-radius: 40px;
+    font-size: 16px;
+    color: #fff;
+    padding: 20px 45px 20px 80px;
+}
+
+.input-box input::placeholder{  /* posible a quitar */
+    color: #fff;
+}
+
+.wrapper .btn {
+    width: 100%;
+    height: 45px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+}
+
+.input-box select{
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgb(255, 255, 255, .2);
+    border-radius: 40px;
+    font-size: 16px;
+    color: #fff;
+    padding: 10px 25px 10px 10px;
+}
+
+select option {
+    background-color: #333;
+    color: #fff;
+}
+
+.wrapper .input-area{
+    position: relative;
+    width: 100%;
+    height: 95px;
+    margin: 30px 0;
+}
+
+.input-area textarea{
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgb(255, 255, 255, .2);
+    font-size: 16px;
+    color: #fff;
+    padding: 10px 25px 0px 10px;
+}
+
+.input-area textarea::placeholder {
+    color: #fff;
+}
+
+.input-box i{
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+}
+
+#in-titulo{
+    padding: 20px 45px 20px 68px;
+}
+
+#in-anio{
+    padding: 20px 45px 20px 58px;
+}
+
+#in-direccion{
+    padding: 20px 45px 20px 95px;
+}
+
+#in-portada{
+    padding: 20px 45px 20px 85px;
+}
+
+

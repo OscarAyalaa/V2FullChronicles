@@ -1,0 +1,13 @@
+<p *ngIf="!userLoginOn" class="alert alert-danger">Usuario no authenticado</p>
+<p *ngIf="userLoginOn" class="alert alert-danger">Usuario authenticado</p>
+
+<div class="card">
+    <div class="card-header">
+        Datos personales
+    </div> 
+    <div class="card-body m-0">
+        <app-detalles></app-detalles>
+    </div>
+</div> 
+
+
