@@ -32,12 +32,13 @@ public class MultimediaRes {
     
     @GetMapping("/multimedias")
     public ResponseEntity<ResponseMultimedia> getMultimedia(@RequestParam Optional<String> titulo,
+                                                            @RequestParam Optional<String> usuario,  // agregge parametro y en el metodo tambien
                                                             @RequestParam Optional<Integer> page,
                                                             @RequestParam Optional<Integer> size) throws InterruptedException{
         return ResponseEntity.ok().body(
                 ResponseMultimedia.builder()
                 .message("Multimedias....")
-                .data(Map.of("page", multimediaService.getMultimedia(titulo.orElse(""), page.orElse(0), size.orElse(10))))
+                .data(Map.of("page", multimediaService.getMultimedia(titulo.orElse(""), usuario.orElse(""), page.orElse(0), size.orElse(10))))
                 .build());
     }
     

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, catchError, map, Observable, of, startWith } from 'rxjs';
 import { ApiResponse } from 'src/app/modelos/api-response';
 import { Page } from 'src/app/modelos/page';
+import { LoginService } from 'src/app/services/auth/login.service';
 import { MultimediaService } from 'src/app/services/multimedia/multimedia.service';
 
 @Component({
@@ -18,7 +19,7 @@ export class ListaMultimediasComponent implements OnInit {
   private currentPageSubject = new  BehaviorSubject<number>(0);
   currentPage$ = this.currentPageSubject.asObservable();
 
-  constructor(private multiService: MultimediaService, private router: Router) { }
+  constructor(private multiService: MultimediaService, private router: Router, private loginService: LoginService) { }
 
   ngOnInit(): void {
 

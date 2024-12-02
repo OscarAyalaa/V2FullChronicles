@@ -9,5 +9,6 @@ import com.soa.multimedia.dto.Multimedia;
 
 @Repository
 public interface MultimediaRepository extends JpaRepository<Multimedia, Long>{
-    Page<Multimedia> findByTituloContaining(String titulo, Pageable pageable);
+    /*Page<Multimedia> findByTituloContaining(String titulo, Pageable pageable);*/
+    Page<Multimedia> findByTituloContainingAndUsuario(String titulo, String usuario, Pageable pageable);
 }
