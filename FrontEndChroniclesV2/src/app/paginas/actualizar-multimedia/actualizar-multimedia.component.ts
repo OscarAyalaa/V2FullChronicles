@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Multimedia } from 'src/app/modelos/multimedia';
+import { LoginService } from 'src/app/services/auth/login.service';
 import { MultimediaService } from 'src/app/services/multimedia/multimedia.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class ActualizarMultimediaComponent implements OnInit {
 
   id: number;
   multimedia: Multimedia;
+  
 
   registerForm = this.formBuilder.group({
     titulo:['', Validators.required],
@@ -42,6 +44,7 @@ export class ActualizarMultimediaComponent implements OnInit {
         this.registerForm.controls.sinopsis.setValue(datos.sinopsis.toString());
       }
     )
+    
   }
 
   actualizarMultimedia(){

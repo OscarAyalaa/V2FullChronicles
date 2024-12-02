@@ -99,7 +99,7 @@ select option {
     border: 2px solid rgb(255, 255, 255, .2);
     font-size: 16px;
     color: #fff;
-    padding: 10px 25px 0px 10px;
+    padding: 10px 25px -40px 10px;
 }
 
 .input-area textarea::placeholder {

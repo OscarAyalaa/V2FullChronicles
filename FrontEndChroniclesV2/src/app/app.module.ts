@@ -23,6 +23,7 @@ import { DetallesMultimediaComponent } from './paginas/detalles-multimedia/detal
 import { ActualizarMultimediaComponent } from './paginas/actualizar-multimedia/actualizar-multimedia.component';
 import { JwtInterceptorService } from './services/auth/jwt-interceptor.service';
 import { ErrorInterceptorService } from './services/auth/error-interceptor.service';
+import { RegistroUsuarioComponent } from './paginas/registro-usuario/registro-usuario.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ErrorInterceptorService } from './services/auth/error-interceptor.servi
     ListaMultimediasComponent,
     RegistrarMultimediaComponent,
     DetallesMultimediaComponent,
-    ActualizarMultimediaComponent
+    ActualizarMultimediaComponent,
+    RegistroUsuarioComponent,
   ],
   imports: [
     BrowserModule,

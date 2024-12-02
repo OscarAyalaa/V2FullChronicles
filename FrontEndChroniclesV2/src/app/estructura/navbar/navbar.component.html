@@ -2,16 +2,28 @@
     <mat-toolbar-row>
         <button mat-button (click)="opened=!opened" id="menu"><mat-icon>menu</mat-icon></button>
         <button mat-button id="home" routerLink="/inicio"><mat-icon>theaters</mat-icon>Creepy Chronicles</button>
-        <button *ngIf="!userLoginOn" mat-button id="iniciar" routerLink="/iniciar-sesion"><mat-icon>account_box</mat-icon> Iniciar Sesion</button>
-        <button *ngIf="userLoginOn" mat-button (click)="logout()" id="cerrar" routerLink="/inicio"><mat-icon>account_box</mat-icon> Cerrar Sesion</button>
+        <button *ngIf="!userLoginOn" mat-button id="iniciar"
+            routerLink="/iniciar-sesion"><mat-icon>account_box</mat-icon> Iniciar Sesion</button>
+        <div *ngIf="userLoginOn" class="dropdown">
+            <button id="autenticado" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                {{userOn}}
+            </button>
+            <ul class="dropdown-menu">
+                <li><button mat-button routerLink="/config"><mat-icon>settings</mat-icon> Configuración</button></li>
+                <li><button mat-button (click)="logout()" routerLink="/inicio"><mat-icon>exit_to_app</mat-icon> Cerrar Sesión</button></li>
+            </ul>
+        </div>
     </mat-toolbar-row>
 </mat-toolbar>
 
 <mat-sidenav-container>
     <mat-sidenav [(opened)]="opened" mode="side">
         <mat-list>
-            <mat-list-item><mat-icon> table_chart</mat-icon><a routerLink="lista-multimedias" style="text-decoration: none;">Lista Peliculas</a></mat-list-item>
-            <mat-list-item><mat-icon>library_books</mat-icon><a routerLink="registrar-multimedia" style="text-decoration: none;">Registrar Pelicula</a></mat-list-item>
+            <mat-list-item><mat-icon> table_chart</mat-icon><a routerLink="lista-multimedias"
+                    style="text-decoration: none;">Lista Peliculas</a></mat-list-item>
+            <mat-list-item><mat-icon>library_books</mat-icon><a routerLink="registrar-multimedia"
+                    style="text-decoration: none;">Registrar Pelicula</a></mat-list-item>
         </mat-list>
     </mat-sidenav>
     <mat-sidenav-content>

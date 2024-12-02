@@ -6,11 +6,13 @@ import { ListaMultimediasComponent } from './paginas/lista-multimedias/lista-mul
 import { RegistrarMultimediaComponent } from './paginas/registrar-multimedia/registrar-multimedia.component';
 import { DetallesMultimediaComponent } from './paginas/detalles-multimedia/detalles-multimedia.component';
 import { ActualizarMultimediaComponent } from './paginas/actualizar-multimedia/actualizar-multimedia.component';
+import { RegistroUsuarioComponent } from './paginas/registro-usuario/registro-usuario.component';
 
 const routes: Routes = [
   {path: '', redirectTo:'/inicio', pathMatch:'full'},
   {path: 'inicio', component: InicioComponent},
   {path: 'iniciar-sesion', component: LoginComponent},
+  {path: 'registro-usuario', component: RegistroUsuarioComponent},
   {path: 'lista-multimedias', component: ListaMultimediasComponent},
   {path: 'registrar-multimedia', component: RegistrarMultimediaComponent},
   {path: 'detalles-multimedia/:id', component: DetallesMultimediaComponent},

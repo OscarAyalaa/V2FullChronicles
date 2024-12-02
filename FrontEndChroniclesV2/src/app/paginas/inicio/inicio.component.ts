@@ -9,6 +9,7 @@ import { LoginService } from 'src/app/services/auth/login.service';
 export class InicioComponent implements OnInit {
 
   userLoginOn = false;
+  userOn: String;
 
   constructor(private loginService: LoginService) { }
 
@@ -18,6 +19,12 @@ export class InicioComponent implements OnInit {
         this.userLoginOn = userLoginOn;
       }
     });
+
+    this.loginService.userOn.subscribe({
+      next:(userOn) => {
+        this.userOn = userOn;
+      }
+    })
   }
 
 }

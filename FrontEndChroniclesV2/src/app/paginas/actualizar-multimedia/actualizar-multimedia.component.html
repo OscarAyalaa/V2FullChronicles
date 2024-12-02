@@ -65,7 +65,7 @@
 
             <div class="input-area">
                 <i>Sinopsis:</i>
-                <textarea placeholder="Sinopsis" formControlName="sinopsis" class="form-control" rows="3" required></textarea>
+                <textarea id="in-sinopsis" placeholder="Sinopsis" formControlName="sinopsis" class="form-control" rows="3" required></textarea>
                 <div *ngIf="sinopsis.invalid && (sinopsis.dirty || sinopsis.touched)" class="text-danger">
                   <div *ngIf="sinopsis.errors?.['required']">
                     Sinopsis requerida.

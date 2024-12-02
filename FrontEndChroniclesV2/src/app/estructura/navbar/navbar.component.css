@@ -44,15 +44,28 @@ mat-sidenav-container{
         margin-left: 900px;
     }
 
-    #cerrar{
+    #iniciado{
+        border: none;
+        outline: none;
         height: 50px;
         color: white;
         background-color: black;
-        margin-left: 900px;
+        margin-left: 950px;
     }
 
     mat-icon{
         margin-right: 3px;
+    }
+
+    #autenticado{
+        border: none;
+        outline: none;
+        color: white;
+        background-color: black;
+        font-size: 17px;
+        position: absolute;
+        left: 920px;
+        transform: translateY(-50%);
     }
 
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Multimedia } from 'src/app/modelos/multimedia';
+import { LoginService } from 'src/app/services/auth/login.service';
 import { MultimediaService } from 'src/app/services/multimedia/multimedia.service';
 
 @Component({
@@ -12,6 +13,7 @@ import { MultimediaService } from 'src/app/services/multimedia/multimedia.servic
 export class RegistrarMultimediaComponent implements OnInit {
 
   registroError: string = "";
+  userOn: String;
 
   registerForm = this.formBuilder.group({
     titulo:['', Validators.required],
@@ -20,11 +22,12 @@ export class RegistrarMultimediaComponent implements OnInit {
     direccion:['', Validators.required],
     tipo:['', Validators.required],
     portada:['', Validators.required],
-    sinopsis:['', Validators.required]
+    sinopsis:['', Validators.required],
+    usuario:['']
   })
 
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private multiService: MultimediaService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private multiService: MultimediaService, private loginService: LoginService) { }
 
   ngOnInit(): void {
     if (!localStorage.getItem('reloaded')) {
@@ -33,6 +36,13 @@ export class RegistrarMultimediaComponent implements OnInit {
     } else {
       localStorage.removeItem('reloaded');
     }
+
+    this.loginService.userOn.subscribe({
+      next:(userOn) => {
+        const n = userOn.match(/^([^@]+)/);
+        this.userOn = n[1];
+      }
+    })
   }
 
   get titulo(){
@@ -64,6 +74,7 @@ export class RegistrarMultimediaComponent implements OnInit {
   }
 
   guardarMultimedia(){
+    this.registerForm.controls.usuario.setValue(this.userOn.toString());
     if(this.registerForm.valid){
       this.multiService.guardarMultimedia(this.registerForm.value as unknown as Multimedia).subscribe({
         next: (userData) =>{
