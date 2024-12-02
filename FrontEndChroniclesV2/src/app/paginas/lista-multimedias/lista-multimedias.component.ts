@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, catchError, map, Observable, of, startWith } from 'rxjs';
 import { ApiResponse } from 'src/app/modelos/api-response';
 import { Page } from 'src/app/modelos/page';
+import { LoginService } from 'src/app/services/auth/login.service';
 import { MultimediaService } from 'src/app/services/multimedia/multimedia.service';
 
 @Component({
@@ -13,12 +14,14 @@ import { MultimediaService } from 'src/app/services/multimedia/multimedia.servic
 })
 export class ListaMultimediasComponent implements OnInit {
 
+  userOn: string;
+
   multiState$: Observable<{ appState: string, appData?: ApiResponse<Page>, error?: HttpErrorResponse }>;
   responseSubject = new BehaviorSubject<ApiResponse<Page>>(null);
   private currentPageSubject = new  BehaviorSubject<number>(0);
   currentPage$ = this.currentPageSubject.asObservable();
 
-  constructor(private multiService: MultimediaService, private router: Router) { }
+  constructor(private multiService: MultimediaService, private router: Router, private loginService: LoginService) { }
 
   ngOnInit(): void {
 
@@ -28,6 +31,13 @@ export class ListaMultimediasComponent implements OnInit {
     } else {
       localStorage.removeItem('reloaded');
     }
+
+    this.loginService.userOn.subscribe({
+      next:(userOn) => {
+        const n = userOn.match(/^([^@]+)/);
+        this.userOn = n[1];
+      }
+    })
 
     this.multiState$ = this.multiService.media$().pipe(
       map((response: ApiResponse<Page>) => {
@@ -43,7 +53,7 @@ export class ListaMultimediasComponent implements OnInit {
   }
 
   goToPage(titulo?: string, pageNumber: number = 0): void{
-    this.multiState$ = this.multiService.media$(titulo, pageNumber).pipe(
+    this.multiState$ = this.multiService.media$(titulo,this.userOn, pageNumber).pipe(
       map((response: ApiResponse<Page>) => {
         this.responseSubject.next(response);
         this.currentPageSubject.next(pageNumber);

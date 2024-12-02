@@ -29,9 +29,9 @@ public class MultimediaServiceImpl implements MultimediaService{
     private final NamedParameterJdbcTemplate jdbc;
 
     @Override
-    public Page<Multimedia> getMultimedia(String titulo, int page, int size) {
+    public Page<Multimedia> getMultimedia(String titulo,String usuario, int page, int size) { //cambios agrege usuario
         log.info("Fetching users for page {} of size {}", page, size);
-        return multimediaRepository.findByTituloContaining(titulo, PageRequest.of(page, size));
+        return multimediaRepository.findByTituloContainingAndUsuario(titulo, usuario, PageRequest.of(page, size));  // cambios cambie nombre metodo
     }
 
     @Override

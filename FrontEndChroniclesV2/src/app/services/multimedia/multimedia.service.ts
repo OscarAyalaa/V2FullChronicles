@@ -5,17 +5,27 @@ import { ApiResponse } from 'src/app/modelos/api-response';
 import { Multimedia } from 'src/app/modelos/multimedia';
 import { Page } from 'src/app/modelos/page';
 import { environment } from 'src/environments/environment';
+import { LoginService } from '../auth/login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MultimediaService {
 
-  constructor(private http: HttpClient) { }
+  userOn: string;
+
+  constructor(private http: HttpClient, private loginService: LoginService) {
+    this.loginService.userOn.subscribe({
+      next:(userOn) => {
+        const n = userOn.match(/^([^@]+)/);
+        this.userOn = n[1];
+      }
+    })
+   }
 
   // Make call to the back and API to retrive page of multimedias
-  media$ = (titulo: string = '', page: number = 0, size: number = 10): Observable<ApiResponse<Page>> =>
-    this.http.get<any>(environment.urlHost+`multimedias?titulo=${titulo}&page=${page}&size=${size}`)
+  media$ = (titulo: string = '', usuario: string = this.userOn, page: number = 0, size: number = 10): Observable<ApiResponse<Page>> =>
+    this.http.get<any>(environment.urlHost+`multimedias?titulo=${titulo}&usuario=${usuario}&page=${page}&size=${size}`)
 
   // getPelicula(name: string = '', page: number = 0, size: number = 10): Observable<ApiResponse<Pelicula>> {
   //   return this.http.get<ApiResponse<Pelicula>>(`${this.serverUrl}/peliculas?$name=${name}&page=${page}&size=${size}`)
