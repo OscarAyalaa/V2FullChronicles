@@ -14,8 +14,6 @@ import { MultimediaService } from 'src/app/services/multimedia/multimedia.servic
 })
 export class ListaMultimediasComponent implements OnInit {
 
-  userOn: string;
-
   multiState$: Observable<{ appState: string, appData?: ApiResponse<Page>, error?: HttpErrorResponse }>;
   responseSubject = new BehaviorSubject<ApiResponse<Page>>(null);
   private currentPageSubject = new  BehaviorSubject<number>(0);
@@ -32,13 +30,6 @@ export class ListaMultimediasComponent implements OnInit {
       localStorage.removeItem('reloaded');
     }
 
-    this.loginService.userOn.subscribe({
-      next:(userOn) => {
-        const n = userOn.match(/^([^@]+)/);
-        this.userOn = n[1];
-      }
-    })
-
     this.multiState$ = this.multiService.media$().pipe(
       map((response: ApiResponse<Page>) => {
         this.responseSubject.next(response);
@@ -53,7 +44,7 @@ export class ListaMultimediasComponent implements OnInit {
   }
 
   goToPage(titulo?: string, pageNumber: number = 0): void{
-    this.multiState$ = this.multiService.media$(titulo,this.userOn, pageNumber).pipe(
+    this.multiState$ = this.multiService.media$(titulo, pageNumber).pipe(
       map((response: ApiResponse<Page>) => {
         this.responseSubject.next(response);
         this.currentPageSubject.next(pageNumber);

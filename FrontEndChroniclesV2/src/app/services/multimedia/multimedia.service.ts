@@ -24,8 +24,8 @@ export class MultimediaService {
    }
 
   // Make call to the back and API to retrive page of multimedias
-  media$ = (titulo: string = '', usuario: string = this.userOn, page: number = 0, size: number = 10): Observable<ApiResponse<Page>> =>
-    this.http.get<any>(environment.urlHost+`multimedias?titulo=${titulo}&usuario=${usuario}&page=${page}&size=${size}`)
+  media$ = (titulo: string = '', page: number = 0, size: number = 10): Observable<ApiResponse<Page>> =>
+    this.http.get<any>(environment.urlHost+`multimedias?titulo=${titulo}&usuario=${this.userOn}&page=${page}&size=${size}`)
 
   // getPelicula(name: string = '', page: number = 0, size: number = 10): Observable<ApiResponse<Pelicula>> {
   //   return this.http.get<ApiResponse<Pelicula>>(`${this.serverUrl}/peliculas?$name=${name}&page=${page}&size=${size}`)
