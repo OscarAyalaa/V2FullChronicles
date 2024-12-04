@@ -24,6 +24,8 @@ import { ActualizarMultimediaComponent } from './paginas/actualizar-multimedia/a
 import { JwtInterceptorService } from './services/auth/jwt-interceptor.service';
 import { ErrorInterceptorService } from './services/auth/error-interceptor.service';
 import { RegistroUsuarioComponent } from './paginas/registro-usuario/registro-usuario.component';
+import { ConfiguracionComponent } from './paginas/menuSuperior/configuracion/configuracion.component';
+import { PruebasLocComponent } from './paginas/menuSuperior/pruebas-loc/pruebas-loc.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { RegistroUsuarioComponent } from './paginas/registro-usuario/registro-us
     DetallesMultimediaComponent,
     ActualizarMultimediaComponent,
     RegistroUsuarioComponent,
+    ConfiguracionComponent,
+    PruebasLocComponent,
   ],
   imports: [
     BrowserModule,

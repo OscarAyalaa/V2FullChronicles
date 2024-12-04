@@ -6,11 +6,14 @@
             routerLink="/iniciar-sesion"><mat-icon>account_box</mat-icon> Iniciar Sesion</button>
         <div *ngIf="userLoginOn" class="dropdown">
             <button id="autenticado" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
+                aria-expanded="false"><img [src]="'/assets/imagenes/detalles1.jpg'" width="45" height="45" class="rounded-circle"
+                [alt]="' \'s photo'">
                 {{userOn}}
             </button>
             <ul class="dropdown-menu">
-                <li><button mat-button routerLink="/config"><mat-icon>settings</mat-icon> Configuración</button></li>
+                <b id="emailD">{{email}}</b>
+                <li><button mat-button routerLink="/pruebas-locas"><mat-icon>school</mat-icon> Pruebas</button></li>
+                <li><button mat-button routerLink="/configuracion"><mat-icon>settings</mat-icon> Configuración</button></li>
                 <li><button mat-button (click)="logout()" routerLink="/inicio"><mat-icon>exit_to_app</mat-icon> Cerrar Sesión</button></li>
             </ul>
         </div>
