@@ -31,5 +31,6 @@ public class Multimedia {
     private String tipo;
     private String usuario;
     private String portada;
+    @Column(length = 1000000)
     private String sinopsis;
 }
