@@ -64,8 +64,16 @@ mat-sidenav-container{
         background-color: black;
         font-size: 17px;
         position: absolute;
-        left: 920px;
+        left: 880px;
         transform: translateY(-50%);
+    }
+
+    #cuentaI{
+        transform: translateY(15%);
+    }
+
+    #emailD{
+        margin-left: 5px;
     }
 
 

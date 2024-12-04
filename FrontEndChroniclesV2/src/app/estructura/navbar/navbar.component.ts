@@ -12,7 +12,7 @@ export class NavbarComponent implements OnInit {
   opened = false;
   userLoginOn: boolean = false;
   userOn: String;
-
+  email: String;
   constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit(): void {
@@ -24,6 +24,7 @@ export class NavbarComponent implements OnInit {
 
     this.loginService.userOn.subscribe({
       next:(userOn) => {
+        this.email = userOn;
         const n = userOn.match(/^([^@]+)/);
         this.userOn = n[1];
       }
