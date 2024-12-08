@@ -14,6 +14,7 @@ export class RegistrarMultimediaComponent implements OnInit {
 
   registroError: string = "";
   userOn: String;
+  nombreFile = '';
 
   registerForm = this.formBuilder.group({
     titulo:['', Validators.required],
@@ -73,12 +74,26 @@ export class RegistrarMultimediaComponent implements OnInit {
     return this.registerForm.controls.sinopsis;
   }
 
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    this.nombreFile = file.name;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const base64String = (reader.result as string).split(',')[1]; // Remove the prefix
+      this.registerForm.controls.portada.setValue(base64String.trim()); // Set the clean Base64 string
+    };
+    reader.readAsDataURL(file);
+  }
+
   guardarMultimedia(){
     this.registerForm.controls.usuario.setValue(this.userOn.toString());
+    console.log("Base64 String for portada:", this.registerForm.value.portada);
+    console.log("Form data being sent:", this.registerForm.value);
+
     if(this.registerForm.valid){
       this.multiService.guardarMultimedia(this.registerForm.value as unknown as Multimedia).subscribe({
         next: (userData) =>{
-          console.log(userData);
+          console.log("Response from backend:", userData);
         },
         error: (errorData) =>{
           console.error(errorData);

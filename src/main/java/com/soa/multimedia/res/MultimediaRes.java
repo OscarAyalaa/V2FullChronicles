@@ -1,5 +1,7 @@
 package com.soa.multimedia.res;
 
+
+import java.util.Base64;
 import java.util.Map;
 import java.util.Optional;
 
@@ -16,9 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.soa.multimedia.dao.MultimediaService;
 import com.soa.multimedia.dto.Multimedia;
+import com.soa.multimedia.dto.RequestMultimedia;
 import com.soa.multimedia.dto.ResponseMultimedia;
+
 
 import lombok.RequiredArgsConstructor;
 
@@ -29,6 +34,7 @@ import lombok.RequiredArgsConstructor;
 public class MultimediaRes {
     
     private final MultimediaService multimediaService;
+    
     
     @GetMapping("/multimedias")
     public ResponseEntity<ResponseMultimedia> getMultimedia(@RequestParam Optional<String> titulo,
@@ -43,8 +49,34 @@ public class MultimediaRes {
     }
     
     @PostMapping("/multimedias")
-    public ResponseEntity<Multimedia> guardarMultimedia(@RequestBody Multimedia multimedia){
-        return new ResponseEntity<Multimedia>(multimediaService.guardarMultimedia(multimedia), HttpStatus.OK);
+    public ResponseEntity<?> guardarMultimedia(@RequestBody RequestMultimedia multimedia){
+        
+        System.out.println("Received Base64 string: " + multimedia.getPortada());
+        try {
+            String cleanBase64 = multimedia.getPortada().replaceAll("\\s", ""); // Clean input
+            byte[] portadaBytes = Base64.getDecoder().decode(cleanBase64);
+            
+            System.out.println("Decoded successfully.");
+            Multimedia multimediD = Multimedia.builder()
+                    .titulo(multimedia.getTitulo())
+                    .genero(multimedia.getGenero())
+                    .anio(multimedia.getAnio())
+                    .direccion(multimedia.getDireccion())
+                    .tipo(multimedia.getTipo())
+                    .usuario(multimedia.getUsuario())
+                    .portada(portadaBytes)
+                    .sinopsis(multimedia.getSinopsis())
+                    .build();
+
+            multimediaService.guardarMultimedia(multimediD);
+            multimediD.setPortada(null);
+
+            return new ResponseEntity<Multimedia>(multimediD, HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            System.err.println("Invalid Base64 input: " + e.getMessage());
+            throw e;
+        }
+        
     }
     
     @GetMapping("/multimedias/{id}")

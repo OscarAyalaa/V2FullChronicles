@@ -30,7 +30,9 @@ public class Multimedia {
     private String direccion;
     private String tipo;
     private String usuario;
-    private String portada;
+    @Lob
+    @Column(length = 1000000)
+    private byte[] portada;
     @Column(length = 1000000)
     private String sinopsis;
 }

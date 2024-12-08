@@ -1,6 +1,14 @@
 package com.soa.user;
 
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import com.soa.ExceptionHandler.ResourceNotFoundMultimedia;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +18,8 @@ import lombok.RequiredArgsConstructor;
 public class UserService {
     
     private final UserRepository userRepository;
+    private final NamedParameterJdbcTemplate jdbc;
+    private final PasswordEncoder passwordEncoder;
     
     @Transactional
     public UserResponse updateUser(UserRequest userRequest) {
@@ -41,5 +51,46 @@ public class UserService {
             return userDTO;
         }
         return null;
+    }
+
+    public UserCustom byUsername(String username) {
+        String sql = "SELECT id, country, firstname, lastname, password, role, username FROM user WHERE username = :username";
+        
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("username", username);
+        
+        RowMapper<User> rowMapper = new BeanPropertyRowMapper<>(User.class);
+        
+        try {
+            User user = jdbc.queryForObject(sql, parameters, rowMapper);
+            
+            UserCustom resp = UserCustom.builder()
+                    .id(user.getId())
+                    .username(user.getUsername())
+                    .firstname(user.getFirstname())
+                    .lastname(user.getLastname())
+                    .country(user.getCountry())
+                    .password(user.getPassword())
+                    .role(user.getRole())
+                    .build();
+            
+            return resp;
+            
+        } catch (EmptyResultDataAccessException e) {
+            
+            return null;
+        }
+    }
+
+    public UserResponse updateSettings(UserCustom datos) {
+        
+        User user = userRepository.findById(datos.getId())
+                .orElseThrow(() -> new ResourceNotFoundMultimedia("No se encontro multimedia con el ID: "+datos.id));
+        
+        user.setPassword(passwordEncoder.encode(datos.getPassword()));
+        
+        userRepository.save(user);
+        
+        return new UserResponse("Account Settings Actualizados");
     }
 }
