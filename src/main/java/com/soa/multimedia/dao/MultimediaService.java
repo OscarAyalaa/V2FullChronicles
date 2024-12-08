@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 
 import com.soa.multimedia.dto.Multimedia;
 
+
 public interface MultimediaService {
     
     /*Page<Multimedia> getMultimedia(String titulo, int page, int size);*/

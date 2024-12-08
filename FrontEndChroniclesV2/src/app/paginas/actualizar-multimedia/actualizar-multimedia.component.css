@@ -130,4 +130,38 @@ select option {
     padding: 20px 45px 20px 85px;
 }
 
+#fileInput {
+    display: none;
+}
+
+.custom-file{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Style the custom label */
+.custom-file label {
+    display: inline-block;
+    padding: 10px 5px;
+    background-color: #333;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .custom-file label:hover {
+    background-color: #333;
+  }
+
+  .custom-file i{
+    right: 20px;
+    top: 50%;
+    transform: translateY(15%);
+    font-size: 25px;
+}
+
 

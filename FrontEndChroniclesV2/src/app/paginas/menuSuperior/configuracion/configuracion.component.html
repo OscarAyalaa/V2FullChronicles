@@ -1,1 +1,69 @@
-<p>configuracion works!</p>
+<div class="card">
+    <div class="card-header">
+        <p>Datos personales: <b>{{usuario}}</b></p>
+    </div>
+    <div class="card-body m-0">
+        <form [formGroup]="registerForm">
+            <div class="form-group row">
+                <label for="inputFirstName" class="col-sm-1 col-form-label">Nombre</label>
+                <div class="col-sm-11">
+                    <input type="text" formControlName="firstname" class="form-control" id="inputFirstName">
+                    <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)" class="text-danger">
+                        <div *ngIf="firstname.errors?.['required']">
+                            El Nombre es requerido.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputLastName" class="col-sm-1 col-form-label">Apellido</label>
+                <div class="col-sm-11">
+                    <input type="text" formControlName="lastname" class="form-control" id="inputLastName">
+                    <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)" class="text-danger">
+                        <div *ngIf="lastname.errors?.['required']">
+                            El Apellido es requerido.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row border-bottom pb-3">
+                <label for="inputCountry" class="col-sm-1 col-form-label">Pais</label>
+                <div class="col-sm-11">
+                    <input type="text" formControlName="country" class="form-control" id="inputCountry">
+                    <div *ngIf="country.invalid && (country.dirty || country.touched)" class="text-danger">
+                        <div *ngIf="country.errors?.['required']">
+                            El País es requerido.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" (click)="saveDatosPersonales()" class="btn btn-dark mt-3">Guardar</button>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        Cambiar la contraseña.
+    </div>
+    <div class="card-body m-0">
+        <form [formGroup]="settingsForm">
+
+            <div class="form-group row">
+                <label for="inputFirstName" class="col-sm-1 col-form-label">Password <i class='bx bxs-lock-alt'></i></label>
+                <div class="col-sm-11">
+                    <input type="password" placeholder="Password" formControlName="password" class="form-control"
+                        required>
+                    <div *ngIf="password.invalid && (password.dirty || password.touched)" class="text-danger">
+                        <div *ngIf="password.errors?.['required']">
+                            El password es requerido.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" (click)="changePassword()" class="btn btn-dark mt-3">Guardar</button>
+        </form>
+
+    </div>
+</div>

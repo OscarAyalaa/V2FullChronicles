@@ -33,5 +33,15 @@ public class UserController {
     public ResponseEntity<UserResponse> updateUser(@RequestBody UserRequest userRequest){
         return ResponseEntity.ok(userService.updateUser(userRequest));
     }
+    
+    @GetMapping("/byUser/{username}")
+    public ResponseEntity<UserCustom> obtenerUser(@PathVariable String username){
+        return ResponseEntity.ok(userService.byUsername(username));
+    }
+    
+    @PutMapping("/settings")
+    public ResponseEntity<UserResponse> updateSettings(@RequestBody UserCustom datos){
+        return ResponseEntity.ok(userService.updateSettings(datos));
+    }
 
 }

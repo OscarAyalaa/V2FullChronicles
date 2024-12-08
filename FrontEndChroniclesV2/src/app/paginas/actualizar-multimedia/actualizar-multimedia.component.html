@@ -52,15 +52,18 @@
                 <option *ngIf="(multimedia.tipo != 'Animado')" value="Animado">Animado</option>
               </select>
             </div>
+            
 
-            <div class="input-box">
-                <i>Portada:</i>
-                <input id="in-portada" type="text" formControlName="portada" class="form-control" required>
-                <div *ngIf="portada.invalid && (portada.dirty || portada.touched)" class="text-danger">
-                  <div *ngIf="portada.errors?.['required']">
-                    Link requerido.
-                  </div>
+            <div class="custom-file">
+              <label for="fileInput"><i class='bx bx-image-add'></i> Adjuntar Archivo...</label>
+              <input type="file" id="fileInput" (change)="onFileSelected($event)" formControlName="portada"
+                class="file-upload" required>
+                {{nombreFile || "Elige una portada"}}
+              <div *ngIf="portada.invalid && (portada.dirty || portada.touched)" class="text-danger">
+                <div *ngIf="portada.errors?.['required']">
+                  Arvhivo requerido.
                 </div>
+              </div>
             </div>
 
             <div class="input-area">

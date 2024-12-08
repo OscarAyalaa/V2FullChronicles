@@ -31,7 +31,7 @@ export class MultimediaService {
   //   return this.http.get<ApiResponse<Pelicula>>(`${this.serverUrl}/peliculas?$name=${name}&page=${page}&size=${size}`)
   // }
 
-  guardarMultimedia(multimedia: Multimedia): Observable<Object>{
+  guardarMultimedia(multimedia: Multimedia): Observable<any>{
     return this.http.post(environment.urlHost+`multimedias`, multimedia);
   }
 

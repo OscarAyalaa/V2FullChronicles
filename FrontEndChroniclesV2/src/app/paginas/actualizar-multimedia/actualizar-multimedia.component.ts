@@ -16,6 +16,8 @@ export class ActualizarMultimediaComponent implements OnInit {
 
   id: number;
   multimedia: Multimedia;
+
+  nombreFile = '';
   
 
   registerForm = this.formBuilder.group({
@@ -45,6 +47,17 @@ export class ActualizarMultimediaComponent implements OnInit {
       }
     )
     
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    this.nombreFile = file.name;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const base64String = (reader.result as string).split(',')[1]; // Remove the prefix
+      this.registerForm.controls.portada.setValue(base64String.trim()); // Set the clean Base64 string
+    };
+    reader.readAsDataURL(file);
   }
 
   actualizarMultimedia(){
