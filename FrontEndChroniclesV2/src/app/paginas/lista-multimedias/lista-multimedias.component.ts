@@ -18,6 +18,9 @@ export class ListaMultimediasComponent implements OnInit {
   private currentPageSubject = new  BehaviorSubject<number>(0);
   currentPage$ = this.currentPageSubject.asObservable();
 
+  displayedPages: number[] = []; // Pages to display
+  maxPagesToShow = 25; // Maximum pages to display
+
   constructor(private multiService: MultimediaService, private router: Router) { }
 
   ngOnInit(): void {
@@ -33,6 +36,7 @@ export class ListaMultimediasComponent implements OnInit {
       map((response: ApiResponse<Page>) => {
         this.responseSubject.next(response);
         this.currentPageSubject.next(response.data.page.number);
+        this.updateDisplayedPages(); // Update pagination
         console.log(response);
         return ({ appState: 'APP_LOADED', appData: response});
       }
@@ -47,6 +51,7 @@ export class ListaMultimediasComponent implements OnInit {
       map((response: ApiResponse<Page>) => {
         this.responseSubject.next(response);
         this.currentPageSubject.next(pageNumber);
+        this.updateDisplayedPages(); // Update pagination
         console.log(response);
         return ({ appState: 'APP_LOADED', appData: this.responseSubject.value});
       }
@@ -74,6 +79,16 @@ export class ListaMultimediasComponent implements OnInit {
 
   actualizarMultimedia(id: number){
     this.router.navigate(['/actualizar-multimedia', id]);
+  }
+
+  private updateDisplayedPages(): void {
+    const totalPages = this.responseSubject.value.data.page.totalPages;
+    const currentPage = this.currentPageSubject.value;
+
+    const startPage = Math.floor(currentPage / this.maxPagesToShow) * this.maxPagesToShow;
+    const endPage = Math.min(startPage + this.maxPagesToShow, totalPages);
+
+    this.displayedPages = Array.from({ length: endPage - startPage }, (_, i) => startPage + i);
   }
 
 }

@@ -93,5 +93,10 @@ public class MultimediaRes {
     public ResponseEntity<Map<String, Boolean>> eliminarMultimedia(@PathVariable Long id){
         return new ResponseEntity<Map<String,Boolean>>(multimediaService.eliminarMultimedia(id), HttpStatus.OK);
     }
+    
+    @GetMapping("/multimedias/random")
+    public ResponseEntity<Multimedia> multimediaRandom(){
+        return new ResponseEntity<Multimedia>(multimediaService.randomMult(), HttpStatus.OK);
+    }
 
 }

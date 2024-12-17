@@ -32,7 +32,7 @@ mat-sidenav-container{
     
     #home{
         height: 50px;
-        width: 200px;
+        width: 170px;
         color: white;
         background-color: black;
     }
@@ -41,7 +41,7 @@ mat-sidenav-container{
         height: 50px;
         color: white;
         background-color: black;
-        margin-left: 900px;
+        margin-left: 790px;
     }
 
     #iniciado{
@@ -64,7 +64,7 @@ mat-sidenav-container{
         background-color: black;
         font-size: 17px;
         position: absolute;
-        left: 880px;
+        left: 800px;
         transform: translateY(-50%);
     }
 
@@ -74,6 +74,10 @@ mat-sidenav-container{
 
     #emailD{
         margin-left: 5px;
+    }
+
+    #rand{
+        margin-right: 15px;
     }
 
 

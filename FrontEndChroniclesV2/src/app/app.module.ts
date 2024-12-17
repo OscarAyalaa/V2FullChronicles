@@ -26,6 +26,7 @@ import { ErrorInterceptorService } from './services/auth/error-interceptor.servi
 import { RegistroUsuarioComponent } from './paginas/registro-usuario/registro-usuario.component';
 import { ConfiguracionComponent } from './paginas/menuSuperior/configuracion/configuracion.component';
 import { PruebasLocComponent } from './paginas/menuSuperior/pruebas-loc/pruebas-loc.component';
+import { RandomMultComponent } from './paginas/random-mult/random-mult.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { PruebasLocComponent } from './paginas/menuSuperior/pruebas-loc/pruebas-
     RegistroUsuarioComponent,
     ConfiguracionComponent,
     PruebasLocComponent,
+    RandomMultComponent,
   ],
   imports: [
     BrowserModule,
