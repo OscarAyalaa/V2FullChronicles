@@ -2,6 +2,7 @@
     <mat-toolbar-row>
         <button mat-button (click)="opened=!opened" id="menu"><mat-icon>menu</mat-icon></button>
         <button mat-button id="home" routerLink="/inicio"><mat-icon>theaters</mat-icon>Creepy Chronicles</button>
+        <button mat-button id="rand" routerLink="/random-mult">Random</button>
         <button *ngIf="!userLoginOn" mat-button id="iniciar"
             routerLink="/iniciar-sesion"><mat-icon>account_box</mat-icon> Iniciar Sesion</button>
         <div *ngIf="userLoginOn" class="dropdown">
@@ -24,9 +25,9 @@
     <mat-sidenav [(opened)]="opened" mode="side">
         <mat-list>
             <mat-list-item><mat-icon> table_chart</mat-icon><a routerLink="lista-multimedias"
-                    style="text-decoration: none;">Lista Peliculas</a></mat-list-item>
+                    style="text-decoration: none;">Lista De Multimedias</a></mat-list-item>
             <mat-list-item><mat-icon>library_books</mat-icon><a routerLink="registrar-multimedia"
-                    style="text-decoration: none;">Registrar Pelicula</a></mat-list-item>
+                    style="text-decoration: none;">Registrar Multimedia</a></mat-list-item>
         </mat-list>
     </mat-sidenav>
     <mat-sidenav-content>

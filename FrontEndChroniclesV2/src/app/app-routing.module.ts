@@ -9,6 +9,7 @@ import { ActualizarMultimediaComponent } from './paginas/actualizar-multimedia/a
 import { RegistroUsuarioComponent } from './paginas/registro-usuario/registro-usuario.component';
 import { ConfiguracionComponent } from './paginas/menuSuperior/configuracion/configuracion.component';
 import { PruebasLocComponent } from './paginas/menuSuperior/pruebas-loc/pruebas-loc.component';
+import { RandomMultComponent } from './paginas/random-mult/random-mult.component';
 
 const routes: Routes = [
   {path: '', redirectTo:'/inicio', pathMatch:'full'},
@@ -20,7 +21,8 @@ const routes: Routes = [
   {path: 'detalles-multimedia/:id', component: DetallesMultimediaComponent},
   {path: 'actualizar-multimedia/:id', component: ActualizarMultimediaComponent},
   {path: 'configuracion', component: ConfiguracionComponent},
-  {path: 'pruebas-locas', component: PruebasLocComponent}
+  {path: 'pruebas-locas', component: PruebasLocComponent},
+  {path: 'random-mult', component: RandomMultComponent}
 ];
 
 @NgModule({

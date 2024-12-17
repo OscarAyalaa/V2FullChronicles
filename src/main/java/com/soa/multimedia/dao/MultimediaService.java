@@ -15,4 +15,5 @@ public interface MultimediaService {
     Multimedia obtenerMultimediaID(Long id);
     Multimedia actualizarMultimedia(Long id, Multimedia multimediaD);
     Map<String, Boolean> eliminarMultimedia(Long id);
+    Multimedia randomMult();
 }

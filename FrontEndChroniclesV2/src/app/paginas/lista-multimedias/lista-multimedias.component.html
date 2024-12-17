@@ -1,97 +1,116 @@
-<ng-container *ngIf="(multiState$ | async) as state" [ngSwitch]="state.appState">  <!-- *ngIf="(peliState$ | async) as state" [ngSwitch]="state.appState" -->
+<ng-container *ngIf="(multiState$ | async) as state" [ngSwitch]="state.appState">
+  <!-- *ngIf="(peliState$ | async) as state" [ngSwitch]="state.appState" -->
 
-    <!-- Inicia el Nav -->
-    <!-- Termina el Nav -->
-    <form #searchForm="ngForm" (ngSubmit)="goToPage(searchForm.value.name)" class="d-flex" role="search">
-      <input type="text" id="searchInput" name="name" ngModel class="form-control me-2" type="search" placeholder="Search Multimedia" aria-label="Search">
-      <button id="btnSe" class="btn btn-success" type="submit">Search</button>
-    </form>
+  <!-- Inicia el Nav -->
+  <!-- Termina el Nav -->
+  <form #searchForm="ngForm" (ngSubmit)="goToPage(searchForm.value.name)" class="d-flex" role="search">
+    <input type="text" id="searchInput" name="name" ngModel class="form-control me-2" type="search"
+      placeholder="Search Multimedia" aria-label="Search">
+    <button id="btnSe" class="btn btn-success" type="submit">Search</button>
+  </form>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 mt-3"> 
-                <ng-container *ngSwitchCase="'APP_ERROR'">{{ state.error | json }}</ng-container>
-                <ng-container *ngSwitchCase="'APP_LOADING'">
-                    <div class="d-flex justify-content-center mt-4">
-                        <div class="spinner-border text-info" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                    </div>
-                </ng-container>
-
-                <!-- agregar  despues table y paginaton -->
-
-                <ng-container *ngSwitchCase="'APP_LOADED'">
-                    <h3><b>Tabla de Multimedias</b></h3>
-                    <table class="table table-striped">
-                        <thead class="table-light">
-                          <tr>
-                            <th scope="col">Número</th>
-                            <th scope="col">Título</th>
-                            <th scope="col">Género</th>
-                            <th scope="col">Año</th>
-                            <th scope="col">Dirección</th>
-                            <th scope="col">Tipo</th>
-                            <th scope="col">Portada</th>
-                            <th scope="col">Funciones</th>
-                          </tr>
-                        </thead>
-                        <tbody class="table-group-divider">
-                          <tr *ngFor="let multimedia of state.appData.data.page.content; let i = index;">
-                            <td>{{i + 1}}</td>
-                            <td>{{ multimedia.titulo }}</td>
-                            <td>{{ multimedia.genero }}</td>
-                            <td>{{ multimedia.anio }}</td>
-                            <td>{{ multimedia.direccion }}</td>
-                            <td>
-                              <span class="badge"
-                                [ngClass]="[multimedia.tipo === 'Pelicula' ? ' bg-success' : '', multimedia.tipo === 'Serie' ? ' bg-primary' : '', multimedia.tipo === 'Animado' ? ' bg-dark' : '']">
-                                {{ multimedia.tipo }}
-                              </span>
-                            </td>
-                            <td><img class="card-img-top" style="object-fit: cover;" [src]="'data:image/png;base64,'+multimedia.portada" width="60" height="60"
-                                [alt]=" + ' \'s photo'"></td>
-                            <td>
-                              <button (click)="actualizarMultimedia(multimedia.id)" class="btn btn-info">Editar</button>
-                              <button (click)="eliminarMultimedia(multimedia.id)" class="btn btn-danger" style="margin-left: 10px">Eliminar</button>
-                              <button (click)="detallesMultimedia(multimedia.id)" class="btn btn-primary" style="margin-left: 10px">Detalles</button>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-
-                      <div *ngIf="state.appData.data.page.content.length < 1" class="alert alert-secondary" role="alert">
-                        No se encontraron películas pruebe iniciar sesión.
-                      </div>
-
-                      <!-- Inicia Paginacion -->
-                      <nav *ngIf="state.appData.data.page.content.length > 0" aria-label="Page navigation example">
-                        <ul class="pagination justify-content-end"> <!-- justify-content-end -->
-
-                            <li class="page-item pointer" [ngClass]="0 == (currentPage$ | async) ? 'disabled' : ''"> <!-- "page-item pointer" [ngClass]="0 == (currentPage$ | async) ? 'disabled' : ''" -->
-                              <a (click)="goToNextOrPreviousPage('backward', searchForm.value.name)" class="page-link" aria-label="Previous"> <!-- (click)="goToNextOrPreviousPage('backward', searchForm.value.name)" -->
-                                <span aria-hidden="true">&laquo; Previous</span>
-                              </a>
-                            </li>
-
-                            <li *ngFor="let pageNumber of [].constructor(state.appData.data.page.totalPages); let i = index;"
-                            class="page-item pointer" [ngClass]="i == (currentPage$ | async) ? ' active' : ''">    <!--*ngFor="let pageNumber of [].constructor(state.appData.data.page.totalPages); let i = index;" class="page-item pointer" [ngClass]="i == (currentPage$ | async) ? ' active' : ''" -->
-                              <a (click)="goToPage(searchForm.value.name, i)" class="page-link"> <!-- (click)="goToPage(searchForm.value.name, i)" class="page-link" -->
-                                {{ i + 1 }}
-                              </a>
-                            </li>
-                            
-                            <li class="page-item pointer" [ngClass]="(state.appData.data.page.totalPages -1) == (currentPage$ | async) ? ' disabled' : ''"> <!-- "page-item pointer" [ngClass]="(state.appData.data.page.totalPages -1) == (currentPage$ | async) ? ' disabled' : ''" -->
-                              <a (click)="goToNextOrPreviousPage('forward', searchForm.value.name)" class="page-link" aria-label="Next">   <!-- (click)="goToNextOrPreviousPage('forward', searchForm.value.name)"  -->
-                                <span aria-hidden="true">Next &raquo;</span>
-                              </a>
-                            </li>
-
-                          </ul>
-                      </nav>
-
-                </ng-container>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 mt-3">
+        <ng-container *ngSwitchCase="'APP_ERROR'">{{ state.error | json }}</ng-container>
+        <ng-container *ngSwitchCase="'APP_LOADING'">
+          <div class="d-flex justify-content-center mt-4">
+            <div class="spinner-border text-info" role="status">
+              <span class="visually-hidden">Loading...</span>
             </div>
-        </div>
+          </div>
+        </ng-container>
+
+        <!-- agregar  despues table y paginaton -->
+
+        <ng-container *ngSwitchCase="'APP_LOADED'">
+          <h3><b>Tabla de Multimedias</b></h3>
+          <table class="table table-striped">
+            <thead class="table-light">
+              <tr>
+                <th scope="col">Número</th>
+                <th scope="col">Título</th>
+                <th scope="col">Género</th>
+                <th scope="col">Año</th>
+                <th scope="col">Dirección</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Portada</th>
+                <th scope="col">Opciones</th>
+              </tr>
+            </thead>
+            <tbody class="table-group-divider">
+              <tr *ngFor="let multimedia of state.appData.data.page.content; let i = index;">
+                <td>{{i + 1}}</td>
+                <td>{{ multimedia.titulo }}</td>
+                <td>{{ multimedia.genero }}</td>
+                <td>{{ multimedia.anio }}</td>
+                <td>{{ multimedia.direccion }}</td>
+                <td>
+                  <span class="badge"
+                    [ngClass]="[multimedia.tipo === 'Pelicula' ? ' bg-success' : '', multimedia.tipo === 'Serie' ? ' bg-primary' : '', multimedia.tipo === 'Animado' ? ' bg-dark' : '']">
+                    {{ multimedia.tipo }}
+                  </span>
+                </td>
+                <td><img class="card-img-top" style="object-fit: cover;"
+                    [src]="'data:image/png;base64,'+multimedia.portada" width="60" height="60" [alt]=" + ' \'s photo'">
+                </td>
+                <td>
+                  <button id="autenticado" class="btn btn-secondary dropdown-toggle" type="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <mat-icon>settings</mat-icon>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><button id="Detalles" (click)="detallesMultimedia(multimedia.id)" class="btn btn-primary"
+                      style="margin-left: 10px">Detalles</button></li>
+                    <li><button id="Editar" (click)="actualizarMultimedia(multimedia.id)"
+                        class="btn btn-info">Editar</button></li>
+                    <li><button id="Eliminar" (click)="eliminarMultimedia(multimedia.id)" class="btn btn-danger"
+                        style="margin-left: 10px">Eliminar</button></li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div *ngIf="state.appData.data.page.content.length < 1" class="alert alert-secondary" role="alert">
+            No se encontraron películas pruebe iniciar sesión.
+          </div>
+
+          <!-- Inicia Paginacion -->
+          <nav *ngIf="state.appData.data.page.content.length > 0" aria-label="Page navigation example">
+            <ul class="pagination justify-content-end"> <!-- justify-content-end -->
+
+              <li class="page-item pointer" [ngClass]="0 == (currentPage$ | async) ? 'disabled' : ''">
+                <!-- "page-item pointer" [ngClass]="0 == (currentPage$ | async) ? 'disabled' : ''" -->
+                <a (click)="goToNextOrPreviousPage('backward', searchForm.value.name)" class="page-link"
+                  aria-label="Previous"> <!-- (click)="goToNextOrPreviousPage('backward', searchForm.value.name)" -->
+                  <span aria-hidden="true">&laquo; Previous</span>
+                </a>
+              </li>
+
+              <li *ngFor="let pageNumber of displayedPages" class="page-item pointer"
+                [ngClass]="pageNumber == (currentPage$ | async) ? ' active' : ''">
+                <!--*ngFor="let pageNumber of [].constructor(state.appData.data.page.totalPages); let i = index;" class="page-item pointer" [ngClass]="i == (currentPage$ | async) ? ' active' : ''" -->
+                <a (click)="goToPage(searchForm.value.name, pageNumber)" class="page-link">
+                  <!-- (click)="goToPage(searchForm.value.name, i)" class="page-link" -->
+                  {{ pageNumber + 1 }}
+                </a>
+              </li>
+
+              <li class="page-item pointer"
+                [ngClass]="(state.appData.data.page.totalPages -1) == (currentPage$ | async) ? ' disabled' : ''">
+                <!-- "page-item pointer" [ngClass]="(state.appData.data.page.totalPages -1) == (currentPage$ | async) ? ' disabled' : ''" -->
+                <a (click)="goToNextOrPreviousPage('forward', searchForm.value.name)" class="page-link"
+                  aria-label="Next"> <!-- (click)="goToNextOrPreviousPage('forward', searchForm.value.name)"  -->
+                  <span aria-hidden="true">Next &raquo;</span>
+                </a>
+              </li>
+
+            </ul>
+          </nav>
+
+        </ng-container>
+      </div>
     </div>
+  </div>
 </ng-container>

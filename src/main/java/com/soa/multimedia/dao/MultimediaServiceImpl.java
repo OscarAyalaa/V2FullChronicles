@@ -5,6 +5,9 @@ import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -81,6 +84,16 @@ public class MultimediaServiceImpl implements MultimediaService{
     
     private int getRegisterCount(Multimedia datosMultimedia) {
         return jdbc.queryForObject(COUNT_MULTIMEDIA_REGISTER_QUERY, Map.of("titulo", datosMultimedia.getTitulo()+"%", "anio", datosMultimedia.getAnio(), "director", datosMultimedia.getDireccion()), Integer.class);
+    }
+
+    
+    @Override
+    public Multimedia randomMult() {
+        String sql = "SELECT * FROM multimedia ORDER BY RAND() LIMIT 1";
+        RowMapper<Multimedia> rowMapper = new BeanPropertyRowMapper<>(Multimedia.class);
+     // Pass an empty parameter source
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        return jdbc.queryForObject(sql, params, rowMapper);
     }
 
 
