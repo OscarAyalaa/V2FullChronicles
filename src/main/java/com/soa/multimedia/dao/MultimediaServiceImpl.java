@@ -63,6 +63,8 @@ public class MultimediaServiceImpl implements MultimediaService{
         multimedia.setTipo(multimediaD.getTipo());
         multimedia.setPortada(multimediaD.getPortada());
         multimedia.setSinopsis(multimediaD.getSinopsis());
+        multimedia.setTemporadas(multimediaD.getTemporadas());
+        multimedia.setEpisodios(multimediaD.getEpisodios());
         
         Multimedia multimediaActualizada = multimediaRepository.save(multimedia);
         

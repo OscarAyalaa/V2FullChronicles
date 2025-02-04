@@ -66,6 +66,8 @@ public class MultimediaRes {
                     .usuario(multimedia.getUsuario())
                     .portada(portadaBytes)
                     .sinopsis(multimedia.getSinopsis())
+                    .temporadas(multimedia.getTemporadas())
+                    .episodios(multimedia.getEpisodios())
                     .build();
 
             multimediaService.guardarMultimedia(multimediD);

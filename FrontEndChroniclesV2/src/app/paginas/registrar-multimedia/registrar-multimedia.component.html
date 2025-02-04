@@ -49,6 +49,24 @@
         </select>
       </div>
 
+      <div class="input-box" *ngIf="((registerForm.get('tipo').value === 'Serie') || (registerForm.get('tipo').value === 'Animado'))">
+        <input type="number" placeholder="Temporadas" formControlName="temporadas" class="form-control" required>
+        <div *ngIf="temporadas.invalid && (temporadas.dirty || temporadas.touched)" class="text-danger">
+          <div *ngIf="temporadas.errors?.['required']">
+            El Número de temporadas es requerido.
+          </div>
+        </div>
+      </div>
+
+      <div class="input-box" *ngIf="((registerForm.get('tipo').value === 'Serie') || (registerForm.get('tipo').value === 'Animado'))">
+        <input type="number" placeholder="Episodios" formControlName="episodios" class="form-control" required>
+        <div *ngIf="episodios.invalid && (episodios.dirty || episodios.touched)" class="text-danger">
+          <div *ngIf="episodios.errors?.['required']">
+            El Número de episodios es requerido.
+          </div>
+        </div>
+      </div>
+
       <div class="custom-file">
         <label for="fileInput"><i class='bx bx-image-add'></i> Adjuntar Archivo...</label>
         <input type="file" id="fileInput" (change)="onFileSelected($event)" formControlName="portada"

@@ -24,7 +24,9 @@ export class RegistrarMultimediaComponent implements OnInit {
     tipo:['', Validators.required],
     portada:['', Validators.required],
     sinopsis:['', Validators.required],
-    usuario:['']
+    usuario:[''],
+    temporadas:[''],
+    episodios:['']
   })
 
 
@@ -72,6 +74,14 @@ export class RegistrarMultimediaComponent implements OnInit {
 
   get sinopsis(){
     return this.registerForm.controls.sinopsis;
+  }
+
+  get temporadas(){
+    return this.registerForm.controls.temporadas;
+  }
+
+  get episodios(){
+    return this.registerForm.controls.episodios;
   }
 
   onFileSelected(event: any) {

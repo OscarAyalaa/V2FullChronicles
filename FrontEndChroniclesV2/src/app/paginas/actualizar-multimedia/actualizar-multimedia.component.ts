@@ -27,7 +27,9 @@ export class ActualizarMultimediaComponent implements OnInit {
     direccion:['', Validators.required],
     tipo:['', Validators.required],
     portada:['', Validators.required],
-    sinopsis:['', Validators.required]
+    sinopsis:['', Validators.required],
+    temporadas:['', Validators.required],
+    episodios:['', Validators.required]
   })
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private multiService: MultimediaService) { }
@@ -44,6 +46,8 @@ export class ActualizarMultimediaComponent implements OnInit {
         this.registerForm.controls.tipo.setValue(datos.tipo.toString());
         this.registerForm.controls.portada.setValue(datos.portada.toString());
         this.registerForm.controls.sinopsis.setValue(datos.sinopsis.toString());
+        this.registerForm.controls.temporadas.setValue(datos.temporadas.toString());
+        this.registerForm.controls.episodios.setValue(datos.episodios.toString());
       }
     )
     
@@ -94,6 +98,14 @@ export class ActualizarMultimediaComponent implements OnInit {
 
   get sinopsis(){
     return this.registerForm.controls.sinopsis;
+  }
+
+  get temporadas(){
+    return this.registerForm.controls.temporadas;
+  }
+
+  get episodios(){
+    return this.registerForm.controls.episodios;
   }
 
 }

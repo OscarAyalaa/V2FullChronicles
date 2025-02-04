@@ -1,43 +1,56 @@
+
+
 <body>
-    <div class="wrapper">
-       <form [formGroup]="registerForm">
-          <p class="text-danger">{{ActError}}</p>
-          <h1>Recomendación Random.</h1>
+  <ng-container *ngIf="(randomSt$ | async) as state" [ngSwitch]="state.appState">
+    <ng-container *ngSwitchCase="'APP_LOADING'">
+      <div class="d-flex justify-content-center mt-4">
+        <div class="spinner-border text-info" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </ng-container>
 
-          <div class="input-box">
-            <b>Título:</b>
-            <input id="in-titulo" type="text" formControlName="titulo" class="form-control" aria-label="readonly input example" readonly>
-          </div>
-          
-          <div class="input-box">
-            <b>Género:</b>
-            <input id="in-genero" type="text" formControlName="genero" class="form-control" aria-label="readonly input example" readonly>
-          </div>
-          
-          <div class="input-box">
-            <b>Año:</b>
-            <input id="in-anio" type="text" formControlName="anio" class="form-control" aria-label="readonly input example" readonly>
-          </div>
- 
-          <div class="input-box">
-            <b>Dirección:</b>
-            <input id="in-direccion" type="text" formControlName="direccion" class="form-control" aria-label="readonly input example" readonly>
-          </div>
+    <div class="wrapper" *ngSwitchCase="'APP_LOADED'">
+      <form [formGroup]="registerForm">
+         <p class="text-danger">{{ActError}}</p>
+         <h1>Recomendación Random.</h1>
 
-          <div class="input-box">
-            <b>Tipo:</b>
-            <input id="in-tipo" type="text" formControlName="tipo" class="form-control" aria-label="readonly input example" readonly>
-          </div>
+         <div class="input-box">
+           <b>Título:</b>
+           <input id="in-titulo" type="text" formControlName="titulo" class="form-control" aria-label="readonly input example" readonly>
+         </div>
+         
+         <div class="input-box">
+           <b>Género:</b>
+           <input id="in-genero" type="text" formControlName="genero" class="form-control" aria-label="readonly input example" readonly>
+         </div>
+         
+         <div class="input-box">
+           <b>Año:</b>
+           <input id="in-anio" type="text" formControlName="anio" class="form-control" aria-label="readonly input example" readonly>
+         </div>
 
-          <!--<div class="input-area1">
-            <b>Portada:</b>
-            <textarea formControlName="portada" class="form-control" rows="3"  aria-label="readonly input example" readonly></textarea>
-          </div>-->
+         <div class="input-box">
+           <b>Dirección:</b>
+           <input id="in-direccion" type="text" formControlName="direccion" class="form-control" aria-label="readonly input example" readonly>
+         </div>
 
-          <div class="input-area">
-            <b>Sinopsis:</b>
-            <textarea formControlName="sinopsis" class="form-control"  aria-label="readonly input example" readonly></textarea>
-          </div>
-       </form>
-    </div>
+         <div class="input-box">
+           <b>Tipo:</b>
+           <input id="in-tipo" type="text" formControlName="tipo" class="form-control" aria-label="readonly input example" readonly>
+         </div>
+
+         <!--<div class="input-area1">
+           <b>Portada:</b>
+           <textarea formControlName="portada" class="form-control" rows="3"  aria-label="readonly input example" readonly></textarea>
+         </div>-->
+
+         <div class="input-area">
+           <b>Sinopsis:</b>
+           <textarea formControlName="sinopsis" class="form-control"  aria-label="readonly input example" readonly></textarea>
+         </div>
+      </form>
+   </div>
+  
+  </ng-container>
  </body>

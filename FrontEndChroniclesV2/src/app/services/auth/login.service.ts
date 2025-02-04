@@ -45,6 +45,7 @@ export class LoginService {
   logout():void{
     sessionStorage.removeItem("token");  //6
     sessionStorage.removeItem("us");    //a
+    localStorage.removeItem('avatarPic');
     this.currentUserLoginOn.next(false);
   }
 
