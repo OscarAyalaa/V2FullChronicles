@@ -8,4 +8,6 @@ export interface Multimedia {
     usuario: string;
     portada: string;
     sinopsis: string;
+    temporadas: number;
+    episodios: number;
 }

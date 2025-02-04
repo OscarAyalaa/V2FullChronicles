@@ -47,6 +47,9 @@ export class MultimediaService {
     return this.http.delete(environment.urlHost+`multimedias/`+id);
   }
 
+  randoM$ = (): Observable<Multimedia> =>  // posible metod para quitar.
+    this.http.get<Multimedia>(environment.urlHost+`multimedias/random`);
+
   randomMultimedia(): Observable<Multimedia>{
     return this.http.get<Multimedia>(environment.urlHost+`multimedias/random`);
   }

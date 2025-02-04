@@ -1,4 +1,4 @@
-package com.soa.multimedia.dto;
+package com.soa.assets;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -20,21 +20,12 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @Getter @Setter
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-public class Multimedia {
-    
+public class Assets {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String titulo;
-    private String genero;
-    private int anio;
-    private String direccion;
-    private String tipo;
-    private String usuario;
+    @Column(nullable = false)
+    private String username;
     @Lob
     @Column(length = 1000000)
-    private byte[] portada;
-    @Column(length = 1000000)
-    private String sinopsis;
-    private int temporadas;
-    private int episodios;
+    private byte[] avatar;
 }

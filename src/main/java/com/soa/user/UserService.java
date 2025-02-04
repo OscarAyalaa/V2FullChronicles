@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.soa.ExceptionHandler.ResourceNotFoundMultimedia;
+import com.soa.assets.Assets;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -92,5 +93,28 @@ public class UserService {
         userRepository.save(user);
         
         return new UserResponse("Account Settings Actualizados");
+    }
+
+    
+    public int guardarAvatar(Assets assets) {
+        
+        String sql = "UPDATE assets SET avatar = :avatar WHERE username = :username";
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("username", assets.getUsername());
+        parameters.addValue("avatar", assets.getAvatar());
+        
+        return jdbc.update(sql, parameters); 
+    }
+
+    public Assets obtenerAssets(String username) {
+        String sql = "SELECT id, avatar, username FROM assets WHERE username = :username";
+        
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("username", username);
+        RowMapper<Assets> rowMapper = new BeanPropertyRowMapper<>(Assets.class);
+        
+        Assets resp = jdbc.queryForObject(sql, parameters, rowMapper);
+        
+        return resp;
     }
 }

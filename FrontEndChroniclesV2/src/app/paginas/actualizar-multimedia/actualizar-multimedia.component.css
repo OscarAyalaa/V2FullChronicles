@@ -122,6 +122,14 @@ select option {
     padding: 20px 45px 20px 58px;
 }
 
+#in-temporadas{
+    padding: 20px 45px 20px 118px;
+}
+
+#in-episodios{
+    padding: 20px 45px 20px 100px;
+}
+
 #in-direccion{
     padding: 20px 45px 20px 95px;
 }

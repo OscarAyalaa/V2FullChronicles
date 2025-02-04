@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Rassets } from 'src/app/modelos/rassets';
 import { User } from 'src/app/modelos/user';
 import { UserCustom } from 'src/app/modelos/user-custom';
 import { LoginService } from 'src/app/services/auth/login.service';
@@ -18,6 +19,7 @@ export class ConfiguracionComponent implements OnInit {
   id: number;
   datosUsuario: UserCustom;
   datosUser: User;
+  nombreFile = '';
 
   registerForm=this.formBuilder.group({
     id:[''],
@@ -29,6 +31,12 @@ export class ConfiguracionComponent implements OnInit {
   settingsForm=this.formBuilder.group({
     id:[''],
     password:['', Validators.required]
+  })
+
+  avatarForm=this.formBuilder.group({
+    id:[''],
+    avatar:['', Validators.required],
+    username:['']
   })
 
   constructor(private loginService: LoginService, private userService: UserService, private formBuilder: FormBuilder) {
@@ -83,6 +91,54 @@ export class ConfiguracionComponent implements OnInit {
 
   get password(){
     return this.settingsForm.controls.password;
+  }
+
+  get avatar(){
+    return this.avatarForm.controls.avatar;
+  }
+
+  get username(){
+    return this.avatarForm.controls.username;
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    this.nombreFile = file.name;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const base64String = (reader.result as string).split(',')[1]; // Remove the prefix
+      this.avatarForm.controls.avatar.setValue(base64String.trim()); // Set the clean Base64 string
+    };
+    reader.readAsDataURL(file);
+  }
+
+  guardarAvtar(){
+    this.avatarForm.controls.username.setValue(this.usuario.toString());
+    console.log("Base64 String for portada:", this.avatarForm.value.avatar);
+    console.log("Form data being sent:", this.avatarForm.value);
+
+    if(this.avatarForm.valid){
+          this.userService.guardarAvatar(this.avatarForm.value as unknown as Rassets).subscribe({
+            next: (userData) =>{
+              console.log("Response from backend:", userData);
+              alert("Cambios realizados");
+              this.ngOnInit();
+            },
+            error: (errorData) =>{
+              console.error(errorData);
+              alert("Error: Existe un error");
+            },
+            complete: () => {
+              console.info("Login completo");
+              localStorage.removeItem('avatarPic');
+            }
+          })
+    
+        }else{
+          this.registerForm.markAllAsTouched();
+          alert("Error al ingresar los datos")
+        }
+
   }
 
 

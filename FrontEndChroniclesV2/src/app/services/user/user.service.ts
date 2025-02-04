@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
+import { Rassets } from 'src/app/modelos/rassets';
 import { User } from 'src/app/modelos/user';
 import { UserCustom } from 'src/app/modelos/user-custom';
 import { environment } from 'src/environments/environment';
@@ -32,6 +33,16 @@ export class UserService {
 
   updateSettings(datos: UserCustom): Observable<any>{
     return this.http.put(environment.urlApi+"user/settings", datos).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  guardarAvatar(assets: Rassets): Observable<any>{
+    return this.http.post(environment.urlApi+"user/settings/avatar", assets);
+  }
+
+  getAssets(username: String): Observable<Rassets>{
+    return this.http.get<Rassets>(environment.urlApi+"user/settings/"+username).pipe(
       catchError(this.handleError)
     )
   }

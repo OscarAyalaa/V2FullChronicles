@@ -75,6 +75,14 @@ body {
     padding: 20px 45px 20px 65px;
 }
 
+#in-temporadas{
+    padding: 20px 45px 20px 123px;
+}
+
+#in-episodios{
+    padding: 20px 45px 20px 105px;
+}
+
 .wrapper .input-area{
     position: relative;
     width: 100%;

@@ -50,7 +50,8 @@
         <form [formGroup]="settingsForm">
 
             <div class="form-group row">
-                <label for="inputFirstName" class="col-sm-1 col-form-label">Password <i class='bx bxs-lock-alt'></i></label>
+                <label for="inputFirstName" class="col-sm-1 col-form-label">Password <i
+                        class='bx bxs-lock-alt'></i></label>
                 <div class="col-sm-11">
                     <input type="password" placeholder="Password" formControlName="password" class="form-control"
                         required>
@@ -63,6 +64,31 @@
             </div>
 
             <button type="submit" (click)="changePassword()" class="btn btn-dark mt-3">Guardar</button>
+        </form>
+
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        Cambiar el Avatar
+    </div>
+    <div class="card-body m-0">
+        <form [formGroup]="avatarForm">
+
+            <div class="form-group row">
+                <label for="fileInput"><i class='bx bx-image-add'></i> Adjuntar Archivo...</label>
+                <input type="file" id="fileInput" (change)="onFileSelected($event)" formControlName="portada"
+                    class="file-upload" required>
+                {{nombreFile || "Elige una portada"}}
+                <div *ngIf="avatar.invalid && (avatar.dirty || avatar.touched)" class="text-danger">
+                    <div *ngIf="avatar.errors?.['required']">
+                        Arvhivo requerido.
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" (click)="guardarAvtar()" class="btn btn-dark mt-3">Cambiar</button>
         </form>
 
     </div>

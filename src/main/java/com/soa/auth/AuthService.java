@@ -6,6 +6,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.soa.assets.Assets;
+import com.soa.assets.AssetsRepository;
 import com.soa.jwt.JwtService;
 import com.soa.user.Role;
 import com.soa.user.User;
@@ -17,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AuthService {
     
+    private final AssetsRepository assetsRepository;
     private final UserRepository userRepository;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
@@ -45,6 +48,12 @@ public class AuthService {
                 .build();
         
         userRepository.save(user);
+        
+        Assets assets = Assets.builder()
+                .username(user.getUsername())
+                .build();
+        
+        assetsRepository.save(assets);
         
         return AuthResponse.builder()
                 .token(jwtService.getToken(user))

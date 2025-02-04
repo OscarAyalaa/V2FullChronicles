@@ -20,4 +20,6 @@ public class RequestMultimedia {
     private String usuario;
     private String portada;
     private String sinopsis;
+    private int temporadas;
+    private int episodios;
 }
